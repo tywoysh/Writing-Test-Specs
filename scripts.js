@@ -39,23 +39,29 @@ const concatOdds = (arr1, arr2) => {
     return oddArrayNoDuplicates;
 
 }
-console.log(concatOdds([3,2,1], [9,1,1,1,4,15,-1]));
 
 
 // Shopping Cart
 
 class ShoppingCart {
     constructor(loggedIn) {
-        this.cart = [];
+        this.cart = {};
         this.loggedIn = loggedIn;
     }
 
     addToCart(item) {
         const name = item.name;
-        name in this.cart ? this.cart[item].quantity++ : this.cart[item].quantity = 1;
-    }
+        if (name in this.cart) {
+            this.cart[item].quantity += 1;
+        } else {
+            this.cart[item].quantity = 1;
+        }
+        // name in this.cart ? this.cart[item].quantity++ : this.cart[item].quantity = 1;
+      }
 }
 
-console.log(ShoppingCart.addToCart(pencil));
+const shoppingCartLoggedIn = new ShoppingCart(true);
+console.log(shoppingCartLoggedIn.cart);
+console.log(shoppingCartLoggedIn.addToCart({ name: 'Toy', price: 5}));
 
 module.exports = {multiplication, concatOdds, ShoppingCart};
